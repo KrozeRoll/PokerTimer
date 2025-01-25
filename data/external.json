@@ -1,1 +1,8 @@
-"lalalallllkjjhkl"
+{
+    "is_active_part": false, 
+    "common_cards": [102, 103, 104],
+    "players_cards": [
+        [202, 203, 204],
+        [302, 303, 304]
+    ]
+}
