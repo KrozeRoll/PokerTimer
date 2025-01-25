@@ -30,6 +30,17 @@ playButton.onclick = clickPlay
 prevRoundButton.onclick = clickPrevRound
 nextRoundButton.onclick = clickNextRound
 
+dataFetchInterval = setInterval(dataFetch, 1000)
+
+function dataFetch() {
+    fetch("./../data/external.json")
+    .then((res) => res.text())
+    .then((text) => {
+        // console.log(text)
+    })
+    .catch((e) => console.error(e));
+}
+
 function parseRoundsData(roundsString) {
     const result = []
     roundsString.matchAll(/.*?-- (\d+) \/ (\d+)( \(ante = (\d+)\))?$/gm).forEach((item) => {
@@ -112,40 +123,4 @@ function updateTimer() {
         currentRound++
         newRound(currentRound)
     }
-
-    // var mydata = external;
-    // console.log(mydata)
-
-    // fetch("./data/external.json")
-    // .then((res) => res.text())
-    // .then((text) => {
-    //     console.log(text)
-    // })
-    // .catch((e) => console.error(e));
-
-    // const requestOptions = {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     // body: JSON.stringify(data),
-    //   };
-    // const apiUrl = 'https://picsum.photos/200/300';
-    // const outputElement = document.getElementById('output');
-
-    // fetch(apiUrl, requestOptions)
-    // .then(response => {
-    //     if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //     }
-    //     return response.json();
-    // })
-    // .then(data => {
-    //     // Display data in an HTML element
-    //     outputElement.textContent = JSON.stringify(data, null, 2);
-    //     console.log(data)
-    // })
-    // .catch(error => {
-    //     console.error('Error:', error);
-    // });
 }
