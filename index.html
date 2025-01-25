@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sanchess Poker Clock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <meta property="og:title" content="Sanchess Poker Clock">
+    <meta property="og:type" content="game">
+    <meta property="og:image" content="https://freepokerclock.com/lib/img/shot.jpg">
+    <style>
+        #root {
+            display: none
+        }
+    </style>
+    
+<link type="text/css" rel="stylesheet" href="./css/tpt.css">
+<link type="text/css" rel="stylesheet" href="./css/css">
+</head>
+
+<body class="maximizable" onload="newRound(0);">
+    <div id="root">
+        <div id="app" class="game">
+            <div class="wrap">
+
+                <div class="screen" id="game">
+                    <div class="wrap">
+                        <div class="pane" id="left_sect">
+                            <div class="row" id="game_level">
+                                <span class="fpc">Sanchess Poker Clock</span>
+                                <span id="level">Round 1</span>
+                            </div>
+
+                            <div class="pane" id="topl_sect">
+
+                                <div class="row" id="ante_blinds">
+                                    <div id="move_round">
+                                        <button id="prev_round" style="transform: rotate(180deg);"></button>
+                                    </div>
+                                    <div class="row" id="timer">
+                                        <header>Time remaining</header>
+                                        <span id="time">--:--</span>
+                                    </div>
+                                    <div id="move_round">
+                                        <button id="next_round"></button>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="progress_wrap">
+                                    <div id="progress_gutter" style="width: 100%;">
+                                        <div id="progress_bar" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="ante_blinds">
+                                    <div id="blinds-wrap">
+                                        <header>Blinds</header>
+                                        <span id="game_blinds">-/-</span>
+                                        <span id="blinds_next" class="next-info"></span>
+                                    </div>
+                                    <div id="progress-actions">
+                                        <button id="play"></button>
+                                    </div>
+                                    <div id="ante-wrap">
+                                        <header>Ante</header>
+                                        <span id="game_ante">-</span>
+                                        <span id="ante_next" class="next-info"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/main.js" async=""></script>
+
+</body></html>
