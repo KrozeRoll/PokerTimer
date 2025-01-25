@@ -31,23 +31,24 @@ playButton.onclick = clickPlay
 prevRoundButton.onclick = clickPrevRound
 nextRoundButton.onclick = clickNextRound
 
-// dataFetchInterval = setInterval(dataFetch, 1000)
+dataFetchInterval = setInterval(dataFetch, 3000)
 
-async function getFileData(path) {
-    return fetch(path)
-    .then((res) => res.json())
-    .then((data) => {
-        // result = data
-        // // console.log(result)
-        return data
-    })
-    .catch((e) => console.error(e));
-    // console.log(result)
+async function getFileData(filePath) {
+    try {
+        const response = await fetch(filePath);
+
+        if (response.ok) {
+            return await response.json();
+        } else {
+            console.error('Failed to fetch file:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error fetching file:', error);
+    }
 }
 
 async function dataFetch() {
     const newData = await getFileData("./../data/external.json")
-    // console.log(newData)
     const hasUpdate = JSON.stringify(newData) !== JSON.stringify(jsonData);
     if (hasUpdate) {
         console.log("Updated")
