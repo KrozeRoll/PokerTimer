@@ -19,6 +19,7 @@ let currentRound = 0
 let isStarted = false
 let currentRoundSeconds = 0
 let timerInterval
+let jsonData = []
 
 playButton = document.getElementById("play")
 prevRoundButton = document.getElementById("prev_round")
@@ -30,15 +31,29 @@ playButton.onclick = clickPlay
 prevRoundButton.onclick = clickPrevRound
 nextRoundButton.onclick = clickNextRound
 
-dataFetchInterval = setInterval(dataFetch, 1000)
+// dataFetchInterval = setInterval(dataFetch, 1000)
 
-function dataFetch() {
-    fetch("./../data/external.json")
-    .then((res) => res.text())
-    .then((text) => {
-        // console.log(text)
+async function getFileData(path) {
+    return fetch(path)
+    .then((res) => res.json())
+    .then((data) => {
+        // result = data
+        // // console.log(result)
+        return data
     })
     .catch((e) => console.error(e));
+    // console.log(result)
+}
+
+async function dataFetch() {
+    const newData = await getFileData("./../data/external.json")
+    // console.log(newData)
+    const hasUpdate = JSON.stringify(newData) !== JSON.stringify(jsonData);
+    if (hasUpdate) {
+        console.log("Updated")
+        jsonData = newData
+        console.log(jsonData)
+    }
 }
 
 function parseRoundsData(roundsString) {
