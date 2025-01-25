@@ -116,12 +116,12 @@ function updateTimer() {
     // var mydata = external;
     // console.log(mydata)
 
-    // fetch("./data/external.json")
-    // .then((res) => res.text())
-    // .then((text) => {
-    //     console.log(text)
-    // })
-    // .catch((e) => console.error(e));
+    fetch("./../data/external.json")
+    .then((res) => res.text())
+    .then((text) => {
+        console.log(text)
+    })
+    .catch((e) => console.error(e));
 
     // const requestOptions = {
     //     method: 'GET',
