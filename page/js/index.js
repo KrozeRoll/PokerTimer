@@ -3,16 +3,16 @@ const ROUNDS_STRING = `
 2. [+0:15] -- 50 / 100
 3. [+0:30] -- 75 / 150
 4. [+0:45] -- 100 / 200
-5. [+1:00] -- 100 / 200 (ante = 25)
-6. [+1:15] -- 125 / 250 (ante = 25)
-7. [+1:30] -- 175 / 350 (ante = 50)
-8. [+1:45] -- 200 / 400 (ante = 50)
-9. [+2:00] -- 300 / 600 (ante = 75)
-10. [+2:15] -- 500 / 1000 (ante = 100)
-11. [+2:30] -- 700 / 1400 (ante = 200)
-12. [+2:45] -- 1000 / 2000 (ante = 300)
+5. [+1:00] -- 125 / 250
+6. [+1:15] -- 175 / 350
+7. [+1:30] -- 200 / 400
+8. [+1:45] -- 300 / 600
+9. [+2:00] -- 500 / 1000
+10. [+2:15] -- 700 / 1400
+11. [+2:30] -- 1000 / 2000
+12. [+2:45] -- 1500 / 3000
 `;
-const ROUND_DURATION_MINUTES = 1
+const ROUND_DURATION_MINUTES = 15
 const ROUNDS = parseRoundsData(ROUNDS_STRING)
 
 let currentRound = 0
@@ -61,6 +61,8 @@ async function dataFetch() {
             updateActiveView(newData)
         } else {
             if (is_active_view_now) {
+                document.getElementById("active_view").style.display = "none"
+                document.getElementById("timer_rounds").style.display = "flex"
                 cleanActiveView()
                 is_active_view_now = false
             }
@@ -83,13 +85,12 @@ async function dataFetch() {
 //         },
 
 function updateActiveView(situationData) {
+    console.log("To Update")
     const common_cards = situationData["common_cards"]
-    for (let i = 0; i < 5; i++) {
-        const card = i < common_cards.length ? common_cards[i] : "1B"
-        const cardPath = getCardPath(card)
-        document.getElementById(`open${i}`).getElementsByTagName("img")[0].src = cardPath
-    }
-    console.log("Updated")
+    common_cards.forEach((card, index) => {
+        document.getElementById(`open${index}`).getElementsByTagName("img")[0].src = getCardPath(card)
+    })
+
     const playersData = situationData["players"]
     playersData.forEach((item, index) => {
         document.getElementById(`player${index}`).style.display="flex"
@@ -100,6 +101,16 @@ function updateActiveView(situationData) {
 
         document.getElementById(`odds${index}`).textContent = `${item["odds"] * 100}%`
     })
+}
+
+function cleanActiveView() {
+    console.log("To Clean")
+    for (let i = 0; i < 6; i++) {
+        document.getElementById(`player${i}`).style.display="none"
+    }
+    for (let i = 0; i < 5; i++) {
+        document.getElementById(`open${i}`).getElementsByTagName("img")[0].src = getCardPath("1B")
+    }
 }
 
 function getCardPath(card) {

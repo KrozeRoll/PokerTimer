@@ -2313,3 +2313,7 @@ body:not(.ios) #dialog-add-player input {
     text-align: center;
     font-weight: 400
 }
+
+.block_up {
+    display: block;
+}
