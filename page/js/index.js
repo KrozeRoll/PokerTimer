@@ -20,6 +20,7 @@ let isStarted = false
 let currentRoundSeconds = 0
 let timerInterval
 let jsonData = []
+let is_active_view_now = false
 
 const playButton = document.getElementById("play")
 const prevRoundButton = document.getElementById("prev_round")
@@ -52,16 +53,57 @@ async function dataFetch() {
     const hasUpdate = JSON.stringify(newData) !== JSON.stringify(jsonData);
     if (hasUpdate) {
         if (newData["is_active_now"]) {
-            document.getElementById("active_view").style.display = "block"
-            document.getElementById("timer_rounds").style.display = "none"
+            if (!is_active_view_now) {
+                document.getElementById("active_view").style.display = "block"
+                document.getElementById("timer_rounds").style.display = "none"
+                is_active_view_now = true
+            }
+            updateActiveView(newData)
         } else {
-            document.getElementById("active_view").style.display = "none"
-            document.getElementById("timer_rounds").style.display = "flex"
+            if (is_active_view_now) {
+                cleanActiveView()
+                is_active_view_now = false
+            }
         }
-        console.log("Updated")
         jsonData = newData
-        console.log(jsonData)
     }
+}
+
+// "players": [
+//         {
+//             "cards": [
+//                 "2D",
+//                 "2C"
+//             ],
+//             "odds": 0.8,
+//             "out_cards": [
+//                 "2D",
+//                 "2C"
+//             ]
+//         },
+
+function updateActiveView(situationData) {
+    const common_cards = situationData["common_cards"]
+    for (let i = 0; i < 5; i++) {
+        const card = i < common_cards.length ? common_cards[i] : "1B"
+        const cardPath = getCardPath(card)
+        document.getElementById(`open${i}`).getElementsByTagName("img")[0].src = cardPath
+    }
+    console.log("Updated")
+    const playersData = situationData["players"]
+    playersData.forEach((item, index) => {
+        document.getElementById(`player${index}`).style.display="flex"
+
+        const cards = item["cards"].map((card) => (getCardPath(card)))
+        document.getElementById(`player${index}_0`).getElementsByTagName("img")[0].src = cards[0]
+        document.getElementById(`player${index}_1`).getElementsByTagName("img")[0].src = cards[1]
+
+        document.getElementById(`odds${index}`).textContent = `${item["odds"] * 100}%`
+    })
+}
+
+function getCardPath(card) {
+    return `svg/cards/${card}.svg`
 }
 
 function parseRoundsData(roundsString) {
