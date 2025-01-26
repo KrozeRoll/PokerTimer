@@ -56,7 +56,7 @@ async function dataFetch() {
             document.getElementById("timer_rounds").style.display = "none"
         } else {
             document.getElementById("active_view").style.display = "none"
-            document.getElementById("timer_rounds").style.display = "block"
+            document.getElementById("timer_rounds").style.display = "flex"
         }
         console.log("Updated")
         jsonData = newData
