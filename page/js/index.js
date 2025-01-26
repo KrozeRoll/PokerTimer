@@ -21,17 +21,17 @@ let currentRoundSeconds = 0
 let timerInterval
 let jsonData = []
 
-playButton = document.getElementById("play")
-prevRoundButton = document.getElementById("prev_round")
-nextRoundButton = document.getElementById("next_round")
-timeDisplay = document.getElementById("time")
-progressBarDisplay = document.getElementById("progress_bar")
+const playButton = document.getElementById("play")
+const prevRoundButton = document.getElementById("prev_round")
+const nextRoundButton = document.getElementById("next_round")
+const timeDisplay = document.getElementById("time")
+const progressBarDisplay = document.getElementById("progress_bar")
 
 playButton.onclick = clickPlay
 prevRoundButton.onclick = clickPrevRound
 nextRoundButton.onclick = clickNextRound
 
-dataFetchInterval = setInterval(dataFetch, 3000)
+const dataFetchInterval = setInterval(dataFetch, 3000)
 
 async function getFileData(filePath) {
     try {
@@ -51,6 +51,13 @@ async function dataFetch() {
     const newData = await getFileData("./../data/external.json")
     const hasUpdate = JSON.stringify(newData) !== JSON.stringify(jsonData);
     if (hasUpdate) {
+        if (newData["is_active_now"]) {
+            document.getElementById("active_view").style.display = "block"
+            document.getElementById("timer_rounds").style.display = "none"
+        } else {
+            document.getElementById("active_view").style.display = "none"
+            document.getElementById("timer_rounds").style.display = "flex"
+        }
         console.log("Updated")
         jsonData = newData
         console.log(jsonData)
