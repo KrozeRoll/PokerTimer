@@ -52,11 +52,11 @@ async function dataFetch() {
     const hasUpdate = JSON.stringify(newData) !== JSON.stringify(jsonData);
     if (hasUpdate) {
         if (newData["is_active_now"]) {
-            document.getElementById("active_view").style.display = "flex"
+            document.getElementById("active_view").style.display = "block"
             document.getElementById("timer_rounds").style.display = "none"
         } else {
             document.getElementById("active_view").style.display = "none"
-            document.getElementById("timer_rounds").style.display = "flex"
+            document.getElementById("timer_rounds").style.display = "block"
         }
         console.log("Updated")
         jsonData = newData

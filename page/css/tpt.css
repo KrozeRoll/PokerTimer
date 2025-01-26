@@ -1898,7 +1898,7 @@ body.modal-on #topl_sect {
     }
 }
 
-#ante_blinds, #timer_rounds, #active_view {
+#ante_blinds, #timer_rounds {
     display: flex;
     display: -webkit-flex;
     flex-direction: row;
@@ -2256,4 +2256,34 @@ body:not(.ios) #dialog-add-player input {
 
 .download-button:hover {
     color: #FFF
+}
+
+#open_cards_holder {
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.open_card {
+    width: 100%;
+    height: 100%;
+    margin: auto 0.5%;
+
+    max-width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.open_card img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto auto;
+    display: block;
 }
