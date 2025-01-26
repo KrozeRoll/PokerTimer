@@ -1898,7 +1898,7 @@ body.modal-on #topl_sect {
     }
 }
 
-#ante_blinds {
+#ante_blinds, #timer_rounds, #active_view {
     display: flex;
     display: -webkit-flex;
     flex-direction: row;
