@@ -86,6 +86,7 @@ async function dataFetch() {
 
 function updateActiveView(situationData) {
     console.log("To Update")
+    cleanActiveView()
     const common_cards = situationData["common_cards"]
     common_cards.forEach((card, index) => {
         document.getElementById(`open${index}`).getElementsByTagName("img")[0].src = getCardPath(card)
@@ -140,6 +141,7 @@ function newRound(roundNumber) {
     currentRoundSeconds = currentRoundData[3] * 60
     displaySeconds(currentRoundSeconds, 0)
     currentRound = roundNumber
+    cleanActiveView()
     // TODO: Play sound
 
     if (roundNumber + 1 < ROUNDS.length) {

@@ -2,3 +2,4 @@
 data/
 data/external.json
 engine/script_config.py
+*.pyc
