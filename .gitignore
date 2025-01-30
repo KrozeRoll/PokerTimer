@@ -1,3 +1,4 @@
 /.DS_Store
 data/
 data/external.json
+engine/script_config.py
