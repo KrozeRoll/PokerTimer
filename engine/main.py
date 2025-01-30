@@ -45,7 +45,7 @@ def start_action(message):
     for value in CARD_VALUES:
         card_buttons = []
         for type in CARD_TYPES: 
-            card_display_text = value + TYPE_TO_EMOJI[type]
+            card_display_text = (value if value != "T" else "10")  + TYPE_TO_EMOJI[type]
             card_button = telebot.types.InlineKeyboardButton(
                 text=card_display_text,
                 callback_data=f"player_{value}{type}"
@@ -65,7 +65,7 @@ def end_players(call):
     for value in CARD_VALUES:
         card_buttons = []
         for type in CARD_TYPES: 
-            card_display_text = value + TYPE_TO_EMOJI[type]
+            card_display_text = (value if value != "T" else "10") + TYPE_TO_EMOJI[type]
             card_button = telebot.types.InlineKeyboardButton(
                 text=card_display_text,
                 callback_data=f"common_{value}{type}"
