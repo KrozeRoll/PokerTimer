@@ -96,9 +96,7 @@ def add_common(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "print_common")
 def print_common(call):
-    odds = []
-    for player in players:
-        odds.append(poker_logic.calc_odds(player, common_cards))
+    odds = poker_logic.calc_odds(players, common_cards)
     data_io.write_data(True, common_cards, players, odds)
     bot.answer_callback_query(call.id, text=f"Printed")
 

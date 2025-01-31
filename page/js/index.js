@@ -56,6 +56,8 @@ async function dataFetch() {
             if (!is_active_view_now) {
                 document.getElementById("active_view").style.display = "block"
                 document.getElementById("timer_rounds").style.display = "none"
+                document.getElementById("level").textContent = "It's All In!"
+                
                 is_active_view_now = true
             }
             updateActiveView(newData)
@@ -63,6 +65,8 @@ async function dataFetch() {
             if (is_active_view_now) {
                 document.getElementById("active_view").style.display = "none"
                 document.getElementById("timer_rounds").style.display = "flex"
+                
+                document.getElementById("level").textContent = `Round ${currentRound + 1}`
                 cleanActiveView()
                 is_active_view_now = false
             }
@@ -100,7 +104,7 @@ function updateActiveView(situationData) {
         document.getElementById(`player${index}_0`).getElementsByTagName("img")[0].src = cards[0]
         document.getElementById(`player${index}_1`).getElementsByTagName("img")[0].src = cards[1]
 
-        document.getElementById(`odds${index}`).textContent = `${item["odds"] * 100}%`
+        document.getElementById(`odds${index}`).textContent = `${(item["odds"] * 100).toFixed(2)}%`
     })
 }
 
